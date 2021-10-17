@@ -1,25 +1,26 @@
 const app = Sammy("#main", function () {
 	this.use("Handlebars", "hbs");
-	console.log("test");
-	this.get("#/home", home);
 
-	this.get("#/details/:id", function (context) {});
+	// Home
+	this.get("#/home", function (context) {
+		context.partial("../views/home.hbs");
+	});
 
-	this.get("#/login", function (context) {});
+	this.get("#/recipes", function (context) {
+		context.partial("../views/recipes.hbs");
+	});
+	this.get("#/login", function (context) {
+		context.partial("../views/login.hbs");
+	});
+	// User
+	this.get("#/register", function (context) {
+		context.partial("../views/registration.hbs");
+	});
+	// this.get("#/login", userController.getLogin);
 
-	this.post("#/login", function (context) {});
-
-	this.get("#/register", function (context) {});
-
-	this.post("#/register", function (context) {});
-
-	this.get("#/profile", function (context) {});
-
-	this.post("#/delete/:id", function (context) {});
-
-	this.get("#/create", function (context) {});
-
-	this.post("#/create", function (context) {});
+	// this.post("#/register", userController.postRegister);
+	// this.post("#/login", userController.postLogin);
+	// this.get("#/logout", userController.logout);
 });
 
 (() => {

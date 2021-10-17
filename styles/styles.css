@@ -16,7 +16,6 @@ body {
 	background-attachment: fixed;
 	font-family: "Lato", sans-serif;
 	color: white;
-	align-items: center;
 }
 
 .nav {
@@ -64,13 +63,14 @@ body {
 
 .homeMain div {
 	width: 75%;
-	height: 525px;
+	height: auto;
 	background-color: rgba(0, 0, 0, 0.7);
 	text-align: center;
 	margin: auto;
 	border: 2px;
 	padding: 10px;
 	border-radius: 25px;
+	min-height: 550px;
 }
 
 .homeMain form {
@@ -130,6 +130,18 @@ body {
 	box-shadow: 2px 2px 2px 2px rgb(0 0 0 / 50%);
 }
 
+.recipes div {
+	width: 350px;
+	height: auto;
+	background-color: rgba(0, 0, 0, 0.7);
+	text-align: center;
+	margin: auto;
+	border: 2px;
+	padding: 10px;
+	border-radius: 25px;
+	min-height: 550px;
+}
+
 button {
 	display: block;
 	margin-left: auto;
@@ -145,6 +157,7 @@ button {
 	padding: 10px 25px;
 	outline: none;
 	margin-top: 15px;
+	margin-bottom: 15px;
 	cursor: pointer;
 	text-transform: uppercase;
 	box-shadow: 2px 2px 2px 2px rgb(0 0 0 / 50%);
@@ -187,84 +200,6 @@ h1 {
 	color: #fff;
 	margin: 40px 0 60px 0;
 	font-weight: 300;
-}
-
-.our-team-main {
-	width: 100%;
-	height: auto;
-	border-bottom: 5px #323233 solid;
-	background: transparent;
-	text-align: center;
-	border-radius: 10px;
-	overflow: hidden;
-	position: relative;
-	transition: 0.5s;
-	margin-bottom: 28px;
-	color: black;
-}
-
-.our-team-main img {
-	border-radius: 10px;
-	margin-bottom: 20px;
-	width: 40%;
-	height: 100%;
-	box-shadow: 0 0 0.2rem 0 rgba(68, 68, 68, 0.2);
-}
-
-.our-team-main h3 {
-	font-size: 20px;
-	font-weight: 700;
-}
-
-.our-team-main p {
-	margin-bottom: 0;
-}
-
-.team-back {
-	width: 100%;
-	height: auto;
-	position: absolute;
-	top: 0;
-	left: 0;
-	padding: 5px 15px 0 15px;
-	text-align: left;
-	background: white;
-	color: black;
-}
-
-.team-front {
-	width: 100%;
-	height: auto;
-	position: relative;
-	z-index: 10;
-	background: rgba(255, 255, 255, 1);
-	padding: 15px;
-	bottom: 0px;
-	transition: all 0.5s ease;
-}
-
-.our-team-main:hover .team-front {
-	bottom: -250px;
-	transition: all 0.5s ease;
-}
-
-.our-team-main:hover {
-	border-color: #777;
-	transition: 0.5s;
-}
-
-.back-side-info {
-	display: inline-block;
-	width: 50%;
-}
-
-.back-side-info a {
-	color: black;
-	font-weight: bold;
-}
-
-.back-side-info a:hover {
-	text-decoration: underline;
 }
 
 nav a:hover {
