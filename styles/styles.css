@@ -129,17 +129,39 @@ body {
 	margin-right: auto;
 	box-shadow: 2px 2px 2px 2px rgb(0 0 0 / 50%);
 }
+.container {
+	display: flex;
+	justify-content: center;
+	flex-wrap: wrap;
+	width: 90%;
+	margin: 10px auto;
+	position: relative;
+	text-align: center;
+}
 
-.recipes div {
-	width: 350px;
+.recipes {
+	width: 300px;
 	height: auto;
 	background-color: rgba(0, 0, 0, 0.7);
 	text-align: center;
 	margin: auto;
 	border: 2px;
-	padding: 10px;
+	padding: 0px;
 	border-radius: 25px;
-	min-height: 550px;
+	min-height: 225px;
+	margin: 20px;
+	display: inline-block;
+}
+
+.recipes img {
+	width: 275px;
+}
+
+.recipes h2 {
+	margin-bottom: 0;
+}
+
+.details {
 }
 
 button {

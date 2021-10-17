@@ -1,3 +1,9 @@
-<div class="homeMain">
-	TEST
+<div class="container">
+	{{#each recipes}}
+		<div id="{{id}}" class="recipes">
+			<h2>{{name}}</h2>
+			<img src="{{imageURL}}" />
+			<button href="#/details/{{id}}">DETAILS</button>
+		</div>
+	{{/each}}
 </div>
