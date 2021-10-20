@@ -84,6 +84,21 @@ body {
 	border-radius: 25px;
 }
 
+.profile {
+	text-align: center;
+}
+
+.profile div {
+	width: 200px;
+	height: auto;
+	background-color: rgba(0, 0, 0, 0.7);
+	text-align: center;
+	margin: auto;
+	border: 2px;
+	padding: 10px;
+	border-radius: 25px;
+}
+
 #login {
 	width: 50%;
 	height: fit-content;
@@ -144,12 +159,14 @@ body {
 	height: auto;
 	background-color: rgba(0, 0, 0, 0.7);
 	text-align: center;
-	margin: auto;
+	margin-top: 0;
 	border: 2px;
 	padding: 0px;
 	border-radius: 25px;
 	min-height: 225px;
-	margin: 20px;
+	margin-bottom: 20px;
+	margin-left: 20px;
+	margin-right: 20px;
 	display: inline-block;
 }
 
@@ -158,10 +175,34 @@ body {
 }
 
 .recipes h2 {
+	margin-top: 20px;
 	margin-bottom: 0;
 }
 
-.details {
+.recepies a button {
+	margin-top: 0;
+}
+#details {
+	max-width: 525px;
+	height: auto;
+	background-color: rgba(0, 0, 0, 0.7);
+	text-align: center;
+	margin: auto;
+	border: 2px;
+	padding: 10px;
+	border-radius: 25px;
+	min-height: 550px;
+}
+
+#detailsImage {
+	width: 400px;
+}
+
+.ingredients div {
+	display: block;
+}
+.ingredients h3 {
+	margin-top: 0;
 }
 
 button {
@@ -178,7 +219,6 @@ button {
 	transition: all 0.2s ease;
 	padding: 10px 25px;
 	outline: none;
-	margin-top: 15px;
 	margin-bottom: 15px;
 	cursor: pointer;
 	text-transform: uppercase;
@@ -225,7 +265,11 @@ h1 {
 }
 
 nav a:hover {
-	color: white;
+	color: rgb(187, 179, 179);
+}
+
+button:hover {
+	color: rgb(187, 179, 179);
 }
 
 img.foodImage {
@@ -243,6 +287,14 @@ img.foodImage {
 #foodNotFound img {
 	height: auto;
 	border-radius: 15px;
+}
+
+#addIngredient {
+	margin: auto;
+	margin-bottom: 20px;
+	display: block;
+	width: 50px;
+	cursor: pointer;
 }
 
 form textarea {
@@ -301,41 +353,8 @@ form textarea {
 	text-align: center;
 }
 
-/*our-team-main*/
-
-/* .color-gray {
-background: rgba(255, 255, 255, .7);
-} */
-
-.form-layout {
-	background: rgba(255, 255, 255, 0.7);
-	border-radius: 4px;
-	margin-top: 50px;
-	color: #050202;
-}
-
-.form-layout button {
-	background: #7d0000;
-	margin-top: 20px !important;
-}
-
-#share-receipt-form select {
-	border-radius: 4px;
-	background: white;
-	width: 100%;
-	padding: 9px;
-	font-weight: 400;
-	line-height: 1.5;
-	color: #495057;
-	background-color: #fff;
-	background-clip: padding-box;
-	border: 1px solid #ced4da;
-	border-radius: 0.25rem;
-	transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
-}
-
 .footer {
-	font-size: 14pt;
+	font-size: 10pt;
 	bottom: 0px;
 	width: 100%;
 	text-align: center;

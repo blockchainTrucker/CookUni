@@ -1,0 +1,24 @@
+{{>header}}
+<section class="profile">
+	<h2>My Profile</h2>
+	<div>
+		<h3>Name</h3>
+		<p>{{firstName}} {{lastName}}</p>
+		<h3>Email</h3>
+		<p>{{email}}</p>
+		<a href="#/create"><button>NEW RECIPE</button></a>
+	</div>
+</section>
+
+<h2 style="text-align: center;">My Recipes</h2>
+<div class="container">
+	{{#each recipes}}
+		<div id="{{id}}" class="recipes">
+			<h2>{{name}}</h2>
+			<img src="{{imageURL}}" />
+			<a href="#/delete/{{id}}"><button>DELETE</button></a>
+			<a href="#/details/{{id}}"><button>DETAILS</button></a>
+		</div>
+	{{/each}}
+</div>
+{{>footer}}

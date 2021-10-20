@@ -1,12 +1,25 @@
-<div id="{{id}}" class="container">
-	<h2>{{name}}</h2>
-	<img src="{{imgURL}}" />
-	<h4>Ingredients</h4>
-	<ul>
-		{{#each ingredients}}
-			<li>{{this}}</li>
-		{{/each}}
-	</ul>
-	<h3>Instructions</h3>
-	<p>{{instructions}}</p>
+{{>header}}
+<div id="details">
+	<div class="container">
+		<h2>{{name}}</h2>
+		<div>
+			<img id="detailsImage" src="{{imageURL}}" />
+		</div>
+		<div class="ingredients">
+			<div>
+				<h3>Ingredients</h3>
+				<ul>
+					{{#each ingredients}}
+						<li>{{this}}</li>
+					{{/each}}
+				</ul>
+			</div>
+			<br />
+			<div>
+				<h3>Instructions</h3>
+				<p>{{description}}</p>
+			</div>
+		</div>
+	</div>
 </div>
+{{>footer}}

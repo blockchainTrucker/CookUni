@@ -1,17 +1,19 @@
+{{>header}}
 <section class="homeMain">
-	<form id="regForm">
+	<form method="POST" action="#/register">
 		<h3>Sign up</h3>
 		<p id="fnError">First name must be at least 2 characters</p>
-		<input id="regFirst" placeholder="First name" />
+		<input name="regFirst" id="regFirst" placeholder="First name" />
 		<p id="lnError">Last name must be at least 2 characters</p>
-		<input id="regLast" placeholder="Last name" />
+		<input name="regLast" id="regLast" placeholder="Last name" />
 		<p id="usernameError">Username must be at least 3 characters</p>
-		<input id="regUser" placeholder="Create a username" />
+		<input name="regUser" id="regUser" placeholder="Create a username" />
 		<p id="passError">Password must be at least 6 characters</p>
-		<input id="regPass" placeholder="Create a password" />
+		<input name="regPass" type="password" id="regPass" placeholder="Create a password" />
 		<p id="passRepError">Passwords do not match</p>
-		<input id="regPassRep" placeholder="Repeat password" />
-		<button type="button" id="regButton">Submit</button>
-		<img id="regPic" href="#" src="images/wings.png" />
+		<input name="regPassRep" type="password" id="regPassRep" placeholder="Repeat password" />
+		<button id="regButton">Submit</button>
+		<img id="regPic" src="images/wings.png" />
 	</form>
 </section>
+{{>footer}}
