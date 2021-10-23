@@ -1,7 +1,9 @@
 const app = Sammy("#main", function () {
 	this.use("Handlebars", "hbs");
 
-	let user = "";
+	let user = {
+		firstName: "John",
+	};
 
 	this.get("#/home", function (context) {
 		if (user.length != 0) {
