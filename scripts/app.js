@@ -126,24 +126,24 @@ const app = Sammy("#main", function () {
 						});
 					console.log(recipesArray);
 					context.recipes = recipesArray;
-				});
-			context.firstName = user.firstName;
-			context.lastName = user.lastName;
-			context.username = user.username;
-			if (user.firstName != "") {
-				context.loggedIn = true;
-			} else {
-				context.loggedIn = false;
-			}
-			context.user = user;
+					context.firstName = user.firstName;
+					context.lastName = user.lastName;
+					context.username = user.username;
+					if (user.firstName != "") {
+						context.loggedIn = true;
+					} else {
+						context.loggedIn = false;
+					}
+					context.user = user;
 
-			context
-				.loadPartials({
-					header: "../views/header.hbs",
-					footer: "../views/footer.hbs",
-				})
-				.then(function () {
-					this.partial("../views/profile.hbs");
+					context
+						.loadPartials({
+							header: "../views/header.hbs",
+							footer: "../views/footer.hbs",
+						})
+						.then(function () {
+							this.partial("../views/profile.hbs");
+						});
 				});
 		}
 	});
@@ -315,6 +315,33 @@ const app = Sammy("#main", function () {
 		} else {
 			console.error("Form Incomplete");
 		}
+	});
+
+	this.get("#/delete/:id", function (context) {
+		// console.log(this.params);
+		let id = this.params.id;
+		console.log(id);
+		let url = `https://cookuni96-default-rtdb.firebaseio.com/recipes/${id}.json`;
+		let headers = {
+			method: "DELETE",
+			headers: {
+				"Content-Type": "application/json",
+			},
+		};
+		fetch(url, headers)
+			.then(function (response) {
+				console.log(response.status);
+				if (response.status == 200) {
+					context.redirect("#/profile");
+				}
+				//check the response for 200
+				//show that it worked in the notifications,
+				//probably need to reload the template
+			})
+			.catch(function (error) {
+				console.log("error");
+				//notifications show error
+			});
 	});
 
 	this.get("#/logout", function (context) {
