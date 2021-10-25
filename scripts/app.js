@@ -109,27 +109,27 @@ const app = Sammy("#main", function () {
 			context.redirect("#/login");
 		} else {
 			context.loggedIn = login;
-
 			fetch("https://cookuni96-default-rtdb.firebaseio.com/recipes.json")
 				.then(function (response) {
 					return response.json();
 				})
 				.then(function (data) {
 					let recipesArray = Object.entries(data);
-					recipesArray = recipesArray.map(function (innerArray) {
-						let [recipeID, recipeObject] = innerArray;
-						recipeObject.id = recipeID;
-						return recipeObject;
-					});
-					recipesArray = recipesArray.filter(function (recipe) {
-						return user.username == recipe.user;
-					});
+					recipesArray = recipesArray
+						.map(function (innerArray) {
+							let [recipeID, recipeObject] = innerArray;
+							recipeObject.id = recipeID;
+							return recipeObject;
+						})
+						.filter(function (recipe) {
+							return user.username == recipe.user;
+						});
+					console.log(recipesArray);
 					context.recipes = recipesArray;
 				});
 			context.firstName = user.firstName;
 			context.lastName = user.lastName;
 			context.username = user.username;
-
 			if (user.firstName != "") {
 				context.loggedIn = true;
 			} else {
