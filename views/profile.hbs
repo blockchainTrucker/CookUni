@@ -19,6 +19,11 @@
 			<a href="#/delete/{{id}}"><button>DELETE</button></a>
 			<a href="#/details/{{id}}"><button>DETAILS</button></a>
 		</div>
+		{{else}}
+		<div class="container">
+			<h4 style="width:100%">No recipes to show...</h4>
+			<img style="width:250px" src="../images/404.jpg">
+		</div>
 	{{/each}}
 </div>
 {{>footer}}

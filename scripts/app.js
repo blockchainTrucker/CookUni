@@ -187,6 +187,10 @@ const app = Sammy("#main", function () {
 						user = hasUser[1];
 						login = true;
 						context.redirect("#/profile");
+						let message = document.getElementById("alertMessage");
+						message.innerHTML = `Welcome back, ${hasUser[1].firstName}!`;
+						let alert = document.getElementById("alert");
+						alert.style.display = "block";
 					} else {
 						// document
 						// 	.getElementById("password")
@@ -247,7 +251,9 @@ const app = Sammy("#main", function () {
 					user.username = data.username;
 					login = true;
 					window.location.hash = "#/profile";
-					let alert = document.getElementById("regAlert");
+					let message = document.getElementById("alertMessage");
+					message.innerHTML = `Welcome ${user.firstName}, you are registered!`;
+					let alert = document.getElementById("alert");
 					alert.style.display = "block";
 				} else {
 					console.log(response.status);
@@ -306,7 +312,9 @@ const app = Sammy("#main", function () {
 				.then(function (response) {
 					if (response.status == 200) {
 						window.location.hash = "#/profile";
-						let alert = document.getElementById("createAlert");
+						let message = document.getElementById("alertMessage");
+						message.innerHTML = `Recipe Created!`;
+						let alert = document.getElementById("alert");
 						alert.style.display = "block";
 					} else {
 						console.log(response.status);
@@ -336,6 +344,10 @@ const app = Sammy("#main", function () {
 				console.log(response.status);
 				if (response.status == 200) {
 					context.redirect("#/profile");
+					let message = document.getElementById("alertMessage");
+					message.innerHTML = `Recipe Deleted!`;
+					let alert = document.getElementById("alert");
+					alert.style.display = "block";
 				}
 				//check the response for 200
 				//show that it worked in the notifications,
@@ -354,6 +366,10 @@ const app = Sammy("#main", function () {
 			username: "",
 		};
 		context.redirect("#/home");
+		let message = document.getElementById("alertMessage");
+		message.innerHTML = `Logged out!`;
+		let alert = document.getElementById("alert");
+		alert.style.display = "block";
 	});
 });
 
