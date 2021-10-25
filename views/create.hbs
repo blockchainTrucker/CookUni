@@ -2,6 +2,7 @@
 <section class="homeMain">
 	<form method="post" action="#/create" id="createForm">
 		<h3>Add a Recipe</h3>
+		<input name="user" value={{user.username}} style="display: none"/>
 		<input name="name" id="dishName" placeholder="Dish Name" />
 		<input name="imageURL" id="createImageURL" placeholder="Enter Image URL" />
 		<input name="description" id="createDescrition" placeholder="Enter Cooking Instructions" />
@@ -10,7 +11,6 @@
         </area>
         <img type="button" id="addIngredient" title="Add an Ingredient" src="images/add.png"/>
 		<button id="regButton">Submit</button>
-   		<img id="regPic" src="images/wings.png" />
 	</form>
 </section>
 {{>footer}}

@@ -2,11 +2,14 @@ const app = Sammy("#main", function () {
 	this.use("Handlebars", "hbs");
 
 	let user = {
-		firstName: "John",
+		firstName: "",
+		lastName: "",
+		username: "",
 	};
+	let login = false;
 
 	this.get("#/home", function (context) {
-		if (user.length != 0) {
+		if (user.firstName != "") {
 			context.loggedIn = true;
 		} else {
 			context.loggedIn = false;
@@ -40,7 +43,7 @@ const app = Sammy("#main", function () {
 					return recipesObject;
 				});
 				context.recipes = recipesArray;
-				if (user.length != 0) {
+				if (user.firstName != "") {
 					context.loggedIn = true;
 				} else {
 					context.loggedIn = false;
@@ -53,12 +56,7 @@ const app = Sammy("#main", function () {
 						footer: "../views/footer.hbs",
 					})
 					.then(function () {
-						this.partial(
-							"../views/recipes.hbs",
-							function (details) {
-								console.log("went home!");
-							}
-						);
+						this.partial("../views/recipes.hbs");
 					});
 			})
 			.catch((err) => {
@@ -81,7 +79,7 @@ const app = Sammy("#main", function () {
 				let recipe = data;
 				context.recipe = recipe;
 
-				if (user.length != 0) {
+				if (user.firstName != "") {
 					context.loggedIn = true;
 				} else {
 					context.loggedIn = false;
@@ -107,41 +105,51 @@ const app = Sammy("#main", function () {
 	});
 
 	this.get("#/profile", function (context) {
-		const recipes = [
-			{
-				id: "-MmFhxK7MGD9dlghOtzK",
-				description: "lots of words",
-				imageURL: "../images/pasta.png",
-				ingredients: ["test1", "test2", "test3", "test4"],
-				name: "Spaghetti",
-			},
-		];
-
-		context.recipes = recipes;
-
-		context.firstName = user.firstName;
-		context.lastName = user.lastName;
-		context.email = user.email;
-
-		if (user.length != 0) {
-			context.loggedIn = true;
+		if (user.firstName == "") {
+			context.redirect("#/login");
 		} else {
-			context.loggedIn = false;
-		}
-		context.user = user;
+			context.loggedIn = login;
 
-		context
-			.loadPartials({
-				header: "../views/header.hbs",
-				footer: "../views/footer.hbs",
-			})
-			.then(function () {
-				this.partial("../views/profile.hbs");
-			});
+			fetch("https://cookuni96-default-rtdb.firebaseio.com/recipes.json")
+				.then(function (response) {
+					return response.json();
+				})
+				.then(function (data) {
+					let recipesArray = Object.entries(data);
+					recipesArray = recipesArray.map(function (innerArray) {
+						let [recipeID, recipeObject] = innerArray;
+						recipeObject.id = recipeID;
+						return recipeObject;
+					});
+					recipesArray = recipesArray.filter(function (recipe) {
+						return user.username == recipe.user;
+					});
+					context.recipes = recipesArray;
+				});
+			context.firstName = user.firstName;
+			context.lastName = user.lastName;
+			context.username = user.username;
+
+			if (user.firstName != "") {
+				context.loggedIn = true;
+			} else {
+				context.loggedIn = false;
+			}
+			context.user = user;
+
+			context
+				.loadPartials({
+					header: "../views/header.hbs",
+					footer: "../views/footer.hbs",
+				})
+				.then(function () {
+					this.partial("../views/profile.hbs");
+				});
+		}
 	});
 
 	this.get("#/login", function (context) {
-		if (user.length != 0) {
+		if (user.firstName != "") {
 			context.loggedIn = true;
 		} else {
 			context.loggedIn = false;
@@ -158,8 +166,46 @@ const app = Sammy("#main", function () {
 			});
 	});
 
+	this.post("#/login", function (context) {
+		let username = this.params.username;
+		let password = this.params.password;
+
+		fetch("https://cookuni96-default-rtdb.firebaseio.com/users/.json")
+			.then((response) => {
+				return response.json();
+			})
+			.then((users) => {
+				let userArray = Object.entries(users);
+				let hasUser = userArray.find((user) => {
+					let [userID, userObj] = user;
+					return userObj.username == username;
+				});
+				console.log(hasUser);
+				if (hasUser != undefined) {
+					if (hasUser[1].password == password) {
+						console.log(hasUser[1]);
+						user = hasUser[1];
+						login = true;
+						context.redirect("#/profile");
+					} else {
+						// document
+						// 	.getElementById("password")
+						// 	.classList.add("is-invalid");
+					}
+				} else {
+					//send error to the front end
+					// document
+					// 	.getElementById("username")
+					// 	.classList.add("is-invalid");
+				}
+			})
+			.catch((err) => {
+				console.log(err);
+			});
+	});
+
 	this.get("#/register", function (context) {
-		if (user.length != 0) {
+		if (user.firstName != "") {
 			context.loggedIn = true;
 		} else {
 			context.loggedIn = false;
@@ -176,7 +222,7 @@ const app = Sammy("#main", function () {
 			});
 	});
 
-	this.post("#/register", function () {
+	this.post("#/register", function (context) {
 		// console.log(this.params);
 		let data = {
 			firstName: this.params.regFirst,
@@ -195,6 +241,11 @@ const app = Sammy("#main", function () {
 		fetch(url, headers)
 			.then(function (response) {
 				if (response.status == 200) {
+					console.log(`${data.firstName} is registered!`);
+					user.firstName = data.firstName;
+					user.lastName = data.lastName;
+					user.username = data.username;
+					login = true;
 					window.location.hash = "#/profile";
 				} else {
 					console.log(response.status);
@@ -206,21 +257,25 @@ const app = Sammy("#main", function () {
 	});
 
 	this.get("#/create", function (context) {
-		if (user.length != 0) {
-			context.loggedIn = true;
+		if (user.firstName == "") {
+			context.redirect("#/login");
 		} else {
-			context.loggedIn = false;
-		}
-		context.user = user;
+			if (user.firstName != "") {
+				context.loggedIn = true;
+			} else {
+				context.loggedIn = false;
+			}
+			context.user = user;
 
-		context
-			.loadPartials({
-				header: "../views/header.hbs",
-				footer: "../views/footer.hbs",
-			})
-			.then(function () {
-				this.partial("../views/create.hbs");
-			});
+			context
+				.loadPartials({
+					header: "../views/header.hbs",
+					footer: "../views/footer.hbs",
+				})
+				.then(function () {
+					this.partial("../views/create.hbs");
+				});
+		}
 	});
 
 	this.post("#/create", function (context) {
@@ -229,6 +284,7 @@ const app = Sammy("#main", function () {
 			imageURL: this.params.imageURL,
 			description: this.params.description,
 			ingredients: this.params.ingredients,
+			user: this.params.user,
 		};
 		let url = "https://cookuni96-default-rtdb.firebaseio.com/recipes.json";
 		let headers = {
@@ -238,17 +294,36 @@ const app = Sammy("#main", function () {
 			},
 			body: JSON.stringify(data),
 		};
-		fetch(url, headers)
-			.then(function (response) {
-				if (response.status == 200) {
-					window.location.hash = "#/profile";
-				} else {
-					console.log(response.status);
-				}
-			})
-			.catch((error) => {
-				console.log(error);
-			});
+		if (
+			data.name !== "" &&
+			data.imageURL !== "" &&
+			data.description !== "" &&
+			data.ingredients !== ""
+		) {
+			fetch(url, headers)
+				.then(function (response) {
+					if (response.status == 200) {
+						window.location.hash = "#/profile";
+						console.log(`${data.name} recipe created!`);
+					} else {
+						console.log(response.status);
+					}
+				})
+				.catch((error) => {
+					console.log(error);
+				});
+		} else {
+			console.error("Form Incomplete");
+		}
+	});
+
+	this.get("#/logout", function (context) {
+		user = {
+			firstName: "",
+			lastName: "",
+			username: "",
+		};
+		context.redirect("#/home");
 	});
 });
 

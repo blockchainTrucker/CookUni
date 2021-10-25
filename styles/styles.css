@@ -41,7 +41,7 @@ body {
 }
 
 .logged-out-nav a {
-	margin-left: 10px;
+	margin: 10px;
 }
 
 .logged-in-nav {
@@ -53,7 +53,7 @@ body {
 }
 
 .logged-in-nav a {
-	margin-left: 10px;
+	margin: 10px;
 }
 
 .homeMain section {
