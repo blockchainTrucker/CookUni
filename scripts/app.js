@@ -247,6 +247,8 @@ const app = Sammy("#main", function () {
 					user.username = data.username;
 					login = true;
 					window.location.hash = "#/profile";
+					let alert = document.getElementById("regAlert");
+					alert.style.display = "block";
 				} else {
 					console.log(response.status);
 				}
@@ -304,7 +306,8 @@ const app = Sammy("#main", function () {
 				.then(function (response) {
 					if (response.status == 200) {
 						window.location.hash = "#/profile";
-						console.log(`${data.name} recipe created!`);
+						let alert = document.getElementById("createAlert");
+						alert.style.display = "block";
 					} else {
 						console.log(response.status);
 					}

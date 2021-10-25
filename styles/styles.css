@@ -17,6 +17,32 @@ body {
 	font-family: "Lato", sans-serif;
 	color: white;
 }
+.alert {
+	display: none;
+	border-radius: 25px;
+	position: absolute;
+	margin-left: 40%;
+	margin-top: 100px;
+	padding: 20px;
+	background-color: rgba(56, 168, 28, 0.822);
+	color: white;
+	width: fit-content;
+}
+
+.closebtn {
+	margin-left: 15px;
+	color: white;
+	font-weight: bold;
+	float: right;
+	font-size: 22px;
+	line-height: 20px;
+	cursor: pointer;
+	transition: 0.3s;
+}
+
+.closebtn:hover {
+	color: black;
+}
 
 .nav {
 	height: fit-content;
