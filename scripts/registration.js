@@ -3,7 +3,7 @@ function newUser() {
 	console.log(submitButton);
 	submitButton.addEventListener("click", () => {
 		let userRegex = new RegExp(/[A-z]{1}[A-z0-9_]{2,24}/);
-		let nameRegex = new RegExp(/[a-zA-Z]{2,}/);
+		let nameRegex = new RegExp(/[a-zA-Z]{2,24}/);
 		let passRegex = new RegExp(/[\S+]{6,24}/);
 		let firstName = document.getElementById("regFirst");
 		let lastName = document.getElementById("regLast");
