@@ -29,12 +29,9 @@ const app = Sammy("#main", function () {
 	this.get("#/recipes", function (context) {
 		fetch("https://cookuni96-default-rtdb.firebaseio.com/recipes.json")
 			.then(function (response) {
-				console.log(response);
 				return response.json();
 			})
 			.then(function (data) {
-				console.log(data);
-
 				let recipesArray = Object.entries(data);
 
 				recipesArray = recipesArray.map(function (innerArray) {
@@ -60,7 +57,7 @@ const app = Sammy("#main", function () {
 					});
 			})
 			.catch((err) => {
-				console.log(err);
+				console.error(err);
 			});
 	});
 
@@ -70,12 +67,9 @@ const app = Sammy("#main", function () {
 			`https://cookuni96-default-rtdb.firebaseio.com/recipes/${recipeID}.json`
 		)
 			.then(function (response) {
-				console.log(response);
 				return response.json();
 			})
 			.then(function (data) {
-				console.log(data);
-
 				let recipe = data;
 				context.recipe = recipe;
 
@@ -100,7 +94,7 @@ const app = Sammy("#main", function () {
 					});
 			})
 			.catch((err) => {
-				console.log(err);
+				console.error(err);
 			});
 	});
 
@@ -124,7 +118,6 @@ const app = Sammy("#main", function () {
 						.filter(function (recipe) {
 							return user.username == recipe.user;
 						});
-					console.log(recipesArray);
 					context.recipes = recipesArray;
 					context.firstName = user.firstName;
 					context.lastName = user.lastName;
@@ -180,10 +173,8 @@ const app = Sammy("#main", function () {
 					let [userID, userObj] = user;
 					return userObj.username == username;
 				});
-				console.log(hasUser);
 				if (hasUser != undefined) {
 					if (hasUser[1].password == password) {
-						console.log(hasUser[1]);
 						user = hasUser[1];
 						login = true;
 						context.redirect("#/profile");
@@ -192,19 +183,16 @@ const app = Sammy("#main", function () {
 						let alert = document.getElementById("alert");
 						alert.style.display = "block";
 					} else {
-						// document
-						// 	.getElementById("password")
-						// 	.classList.add("is-invalid");
+						let error = document.getElementById("loginError");
+						error.style.display = "block";
 					}
 				} else {
-					//send error to the front end
-					// document
-					// 	.getElementById("username")
-					// 	.classList.add("is-invalid");
+					let error = document.getElementById("loginError");
+					error.style.display = "block";
 				}
 			})
 			.catch((err) => {
-				console.log(err);
+				console.error(err);
 			});
 	});
 
@@ -303,7 +291,6 @@ const app = Sammy("#main", function () {
 			fetch(url, headers)
 				.then(function (response) {
 					if (response.status == 200) {
-						console.log(`${data.firstName} is registered!`);
 						user.firstName = data.firstName;
 						user.lastName = data.lastName;
 						user.username = data.username;
@@ -314,7 +301,7 @@ const app = Sammy("#main", function () {
 						alert.style.display = "block";
 						window.location.hash = "#/profile";
 					} else {
-						console.log(response.status);
+						console.error(response.status);
 					}
 				})
 				.catch((error) => {
@@ -376,11 +363,11 @@ const app = Sammy("#main", function () {
 						let alert = document.getElementById("alert");
 						alert.style.display = "block";
 					} else {
-						console.log(response.status);
+						console.error(response.status);
 					}
 				})
 				.catch((error) => {
-					console.log(error);
+					console.error(error);
 				});
 		} else {
 			console.error("Form Incomplete");
@@ -388,9 +375,7 @@ const app = Sammy("#main", function () {
 	});
 
 	this.get("#/delete/:id", function (context) {
-		// console.log(this.params);
 		let id = this.params.id;
-		console.log(id);
 		let url = `https://cookuni96-default-rtdb.firebaseio.com/recipes/${id}.json`;
 		let headers = {
 			method: "DELETE",
@@ -400,7 +385,6 @@ const app = Sammy("#main", function () {
 		};
 		fetch(url, headers)
 			.then(function (response) {
-				console.log(response.status);
 				if (response.status == 200) {
 					context.redirect("#/profile");
 					let message = document.getElementById("alertMessage");
@@ -408,13 +392,9 @@ const app = Sammy("#main", function () {
 					let alert = document.getElementById("alert");
 					alert.style.display = "block";
 				}
-				//check the response for 200
-				//show that it worked in the notifications,
-				//probably need to reload the template
 			})
 			.catch(function (error) {
-				console.log("error");
-				//notifications show error
+				console.error(error);
 			});
 	});
 
