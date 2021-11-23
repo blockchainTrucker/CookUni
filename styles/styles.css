@@ -262,15 +262,7 @@ button {
 #lnError,
 #usernameError,
 #passError,
-#passRepError {
-	font-size: 14pt;
-	color: red;
-	margin: 0;
-	padding-bottom: 5px;
-	display: none;
-}
-
-#loginError {
+#passRepError #loginError {
 	font-size: 14pt;
 	color: red;
 	margin: 0;
