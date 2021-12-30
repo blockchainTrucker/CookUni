@@ -260,7 +260,8 @@ button {
 #lnError,
 #usernameError,
 #passError,
-#passRepError #loginError {
+#passRepError,
+#loginError {
 	font-size: 14pt;
 	color: red;
 	margin: 0;
