@@ -269,7 +269,7 @@ const app = Sammy("#main", function () {
 			let passRep = document.getElementById("passRepError");
 			passRep.style.display = "block";
 		} else {
-			let passRep = document.getElementById("regPassRep");
+			let passRep = document.getElementById("passRepError");
 			passRep.style.display = "none";
 			passRepGood = true;
 		}
