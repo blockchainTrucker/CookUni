@@ -1,0 +1,21 @@
+{{#if loggedIn}}
+	<div class="logged-in-nav">
+		<a href="#/home">Home</a>
+		<split>|</split>
+		<a href="#/recipes">Recipes</a>
+		<split>|</split>
+		<a href="#/profile">Welcome, {{user.firstName}}</a>
+		<split>|</split>
+		<a href="#/logout">Logout</a>
+	</div>
+{{else}}
+	<div class="logged-out-nav">
+		<a href="#/home">Home</a>
+		<split>|</split>
+		<a href="#/recipes">Recipes</a>
+		<split>|</split>
+		<a href="#/login">Login</a>
+		<split>|</split>
+		<a href="#/register">Register</a>
+	</div>
+{{/if}}

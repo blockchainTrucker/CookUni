@@ -60,10 +60,9 @@ body {
 }
 
 .logged-out-nav {
-	float: right;
+	margin-bottom: 20px;
 	margin-top: 5px;
 	text-align: center;
-	margin-right: 30px;
 	font-size: 16pt;
 }
 
@@ -72,10 +71,9 @@ body {
 }
 
 .logged-in-nav {
-	float: right;
+	margin-bottom: 20px;
 	margin-top: 5px;
 	text-align: center;
-	margin-right: 30px;
 	font-size: 16pt;
 }
 
