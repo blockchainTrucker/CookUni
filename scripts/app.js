@@ -9,7 +9,6 @@ const app = Sammy("#main", function () {
 	let login = false;
 
 	this.get("#/home", function (context) {
-		console.log(true);
 		if (user.firstName != "") {
 			context.loggedIn = true;
 		} else {
